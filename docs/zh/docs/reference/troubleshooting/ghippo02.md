@@ -18,6 +18,9 @@ helm get values ghippo -n ghippo-system -o yaml > ghippo-values-bak.yaml
 # 获取当前部署的 ghippo 版本号
 version=$(helm get notes ghippo -n ghippo-system | grep "Chart Version" | awk -F ': ' '{ print $2 }')
 
+# 检查当前 ghippo 的 repo name 后续更新需要用到
+helm repo list
+
 # 执行更新操作, 使配置文件生效
 helm upgrade ghippo ghippo/ghippo \
 -n ghippo-system \
